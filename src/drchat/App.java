@@ -10,18 +10,13 @@ import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 
 //import java.io.*;
-import java.net.URL;
-
 
 public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        //URL xmlUrl = getClass().getResource("/fxml/mainScene.fxml");
-        URL xmlUrl = getClass().getResource("/fxml/builder.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/builder.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("/fxml/message.fxml"));
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drchat.Controller">
   <children>
     <SplitPane dividerPositions="0.5, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" styleClass="bg-white" VBox.vgrow="ALWAYS">
       <items>
@@ -209,7 +209,7 @@
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <TextArea maxHeight="50.0" maxWidth="-Infinity" opacity="0.7" prefHeight="50.0" prefWidth="400.0" wrapText="true" VBox.vgrow="ALWAYS">
+                        <TextArea fx:id="msgArea" maxHeight="50.0" maxWidth="-Infinity" opacity="0.7" prefHeight="50.0" prefWidth="400.0" wrapText="true" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
@@ -222,7 +222,7 @@
                         </TextArea>
                         <HBox alignment="CENTER" prefWidth="200.0" spacing="25.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="200.0" text="POST!">
+                              <Button mnemonicParsing="false" onAction="#sendMessage" prefWidth="200.0" text="POST!">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -243,7 +243,7 @@
                   </VBox>
               <ScrollPane hbarPolicy="NEVER" prefHeight="-1.0" prefWidth="-1.0" styleClass="bg-dark" VBox.vgrow="ALWAYS">
                      <content>
-                        <VBox fillWidth="false">
+                        <VBox fx:id="chatBox" fillWidth="false">
                            <children>
                               <HBox spacing="10.0" stylesheets="@../style/main.css">
                                  <children>
@@ -547,7 +547,7 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </BorderPane>
-                                          <Label maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="linus">
+                                          <Label alignment="CENTER" maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="linus">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -594,7 +594,7 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </BorderPane>
-                                          <Label maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="alex6446">
+                                          <Label alignment="CENTER" maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="alex6446">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -641,7 +641,7 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </BorderPane>
-                                          <Label maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="Zloy">
+                                          <Label alignment="CENTER" maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="Zloy">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
