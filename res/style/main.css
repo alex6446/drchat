@@ -1,0 +1,87 @@
+.root {
+    /*-fx-focus-color: -fx-control-inner-background;*/
+    /*-fx-faint-focus-color: -fx-control-inner-background;*/
+}
+
+.split-pane-divider {
+    -fx-padding: 0 1 0 1 ;
+    -fx-background-color: black ;
+    -fx-background-insets: 0;
+}
+/*.split-pane-divider {*/
+    /*-fx-border-style: solid;*/
+    /*-fx-border-width: 1px;*/
+    /*-fx-background-color: transparent;*/
+    /*-fx-padding: 0 0 0 0;*/
+/*}*/
+
+.text-area {
+  -fx-border-radius: 10px;
+  -fx-background-radius: 10px;
+ }
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 1;
+    -fx-opacity: 0;
+}
+
+.msg-border {
+    /*-fx-border-color: #f4f4f4;*/
+    -fx-border-color: #dbdbdb;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 15px;
+}
+
+.avatar-border {
+    /*-fx-border-color: #f4f4f4;*/
+    -fx-border-color: #dbdbdb;
+    -fx-border-width: 2px;
+}
+
+.msg-bg-orange {
+    -fx-background-color: linear-gradient(#edd65c 0%, #ef933c 50%, #cb6b13 50%, #e17f30 100%);
+    -fx-text-fill: #ffffff; 
+}
+
+.msg-bg-grey {
+    -fx-background-color: linear-gradient(#ccc4c2 0%, #9e9397 50%, #7f747c 50%, #776c72 100%);
+    -fx-text-fill: #ffffff; 
+}
+
+.msg-bg-blue {
+    -fx-background-color: linear-gradient(#8bb4d7 0%, #6999cb 50%, #4e7abb 50%, #4768a9 100%);
+    -fx-text-fill: #ffffff; 
+}
+
+.msg-bg-green {
+    -fx-background-color: linear-gradient(#97bd4d 0%, #84c242 50%, #68b332 50%, #456c23 100%);
+    -fx-text-fill: #ffffff; 
+}
+
+.msg-bg-red {
+    -fx-background-color: linear-gradient(#c55a6b 0%, #9c1728 50%, #8c0004 50%, #8f0006 100%);
+    -fx-text-fill: #ffffff; 
+}
+
+.bg-dark {
+    -fx-base: #000000;
+    -fx-background-color: #000000;
+   /*-fx-text-fill: #f4f4f4; */
+   -fx-text-fill: #dbdbdb; 
+}
+
+
+.bg-white {
+   /*-fx-background-color: #f4f4f4; */
+   -fx-background-color: #dbdbdb; 
+   -fx-text-fill: #000000; 
+}
