@@ -51,26 +51,42 @@
     -fx-background-color: linear-gradient(#edd65c 0%, #ef933c 50%, #cb6b13 50%, #e17f30 100%);
     -fx-text-fill: #ffffff; 
 }
+.av-bg-orange {
+    -fx-background-color: #eba011;
+}
 
 .msg-bg-grey {
     -fx-background-color: linear-gradient(#ccc4c2 0%, #9e9397 50%, #7f747c 50%, #776c72 100%);
     -fx-text-fill: #ffffff; 
+}
+.av-bg-grey {
+    -fx-background-color: #010101;
 }
 
 .msg-bg-blue {
     -fx-background-color: linear-gradient(#8bb4d7 0%, #6999cb 50%, #4e7abb 50%, #4768a9 100%);
     -fx-text-fill: #ffffff; 
 }
+.av-bg-blue {
+    -fx-background-color: #84c4f2;
+}
 
 .msg-bg-green {
     -fx-background-color: linear-gradient(#97bd4d 0%, #84c242 50%, #68b332 50%, #456c23 100%);
     -fx-text-fill: #ffffff; 
+}
+.av-bg-green {
+    -fx-background-color: #84e135;
 }
 
 .msg-bg-red {
     -fx-background-color: linear-gradient(#c55a6b 0%, #9c1728 50%, #8c0004 50%, #8f0006 100%);
     -fx-text-fill: #ffffff; 
 }
+.av-bg-red {
+    -fx-background-color: #970007;
+}
+
 
 .bg-dark {
     -fx-base: #000000;
@@ -84,4 +100,11 @@
    /*-fx-background-color: #f4f4f4; */
    -fx-background-color: #dbdbdb; 
    -fx-text-fill: #000000; 
+}
+
+.white-border {
+    -fx-border-color: #dbdbdb;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+    -fx-border-width: 2px;
 }

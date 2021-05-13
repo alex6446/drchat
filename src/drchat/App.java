@@ -13,9 +13,12 @@ import javafx.fxml.FXMLLoader;
 
 public class App extends Application {
 
+    public static Stage primaryStage;
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/builder.fxml"));
+    public void start(Stage primary) throws Exception {
+        primaryStage = primary;
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         //Parent root = FXMLLoader.load(getClass().getResource("/fxml/message.fxml"));
 
         primaryStage.setScene(new Scene(root));
@@ -23,7 +26,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        // Here you can work with args - command line parameters
         Application.launch(args);
     }
 

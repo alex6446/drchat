@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
-public class Controller implements Initializable {
+public class Chat implements Initializable {
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
