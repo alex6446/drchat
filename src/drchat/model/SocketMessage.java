@@ -1,14 +1,15 @@
-package drchat;
+package drchat.model;
 
 import java.io.Serializable;
 
 public class SocketMessage implements Serializable {
 
-    public enum Type { USER, MESSAGE, CONNECTION };
+    public enum Type { ACTIVATION, LOGIN, USER, MESSAGE, FAIL, GET_USERS };
 
     private Type type;
     private Serializable msg;
 
+    public SocketMessage() { } 
     public SocketMessage(Type msgType, Serializable msgObj) {
         this.type = msgType;
         this.msg = msgObj;
