@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
 
-    public Message(int sid, int rid, String content) {
-        this.sender_id = sid;
-        this.receiver_id = rid;
-        this.content = content;
+    public Message(int sid, int rid, String txt) {
+        sender_id = sid;
+        receiver_id = rid;
+        text = txt;
     }
 
     private int sender_id;
     private int receiver_id; // global name for group
-    private String content; 
+    private String text; 
 
     public int getSenderID() { return sender_id; }
     public int getReceiverID() { return receiver_id; }
-    public String getContent() { return content; }
+    public String getText() { return text; }
 
     public void setSenderID(int id) { sender_id = id; }
     public void setReceiverID(int id) { receiver_id = id; }
-    public void setContent(String content) { this.content = content; }
+    public void setText(String txt) { text = txt; }
 
 }
 

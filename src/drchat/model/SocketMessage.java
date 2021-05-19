@@ -16,7 +16,7 @@ public class SocketMessage implements Serializable {
     }
 
     public Type getMessageType() { return type; }
-    public Serializable getMessageObject() { return type; }
+    public Serializable getMessageObject() { return msg; }
 
     public void setMessageType(Type msgType) { type = msgType; }
     public void setMessageObject(Serializable msgObj) { msg = msgObj; }

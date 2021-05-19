@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drchat.client.Chat">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
       <SplitPane dividerPositions="0.75" VBox.vgrow="ALWAYS">
          <items>
@@ -516,7 +516,38 @@
                                           </Label>
                                        </center>
                                        <HBox.margin>
+                                          <Insets left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </BorderPane>
+                                    <Label text="alex6446" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="35.0">
+                                       <styleClass>
+                                          <String fx:value="av-bg-grey" />
+                                          <String fx:value="avatar-border" />
+                                       </styleClass>
+                                       <center>
+                                          <Label text="a64" BorderPane.alignment="CENTER">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </center>
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </BorderPane>
                                     <Label text="alex6446" HBox.hgrow="ALWAYS">

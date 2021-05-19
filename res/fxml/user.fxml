@@ -30,7 +30,7 @@
           </Label>
        </center>
        <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          <Insets left="5.0" right="5.0" top="5.0" />
        </HBox.margin>
     </BorderPane>
     <Label text="alex6446" HBox.hgrow="ALWAYS">

@@ -37,12 +37,17 @@ public class Login implements Initializable {
 
     @FXML
     public void login() throws Exception {
+        //if (username.getText().isBlank() || password.getText().isBlank()) {
+            //alert("Login Failed", "Fill in username and password", "");
+            //return;
+        //}
         int id = client.login(username.getText(), password.getText());
         if (id == -1) {
             alert("Login Failed", "Incorrect username or password", "Please try again");
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/chat.fxml"));
-            chat = fxmlLoader.<Chat>getController();
+            chat = new Chat(id);
+            fxmlLoader.setController(chat);
             App.getPrimaryStage().setScene(new Scene(fxmlLoader.load()));
             Thread listener = new Thread(client);
             listener.start();

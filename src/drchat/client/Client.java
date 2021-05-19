@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import drchat.client.controller.Login;
 import drchat.model.Message;
@@ -62,7 +64,6 @@ public class Client implements Runnable {
         send(message);
         SocketMessage reply = (SocketMessage) ois.readObject();
         return (int) reply.getMessageObject();
-
     }
 
     public void send(SocketMessage message) throws NullPointerException, IOException {
@@ -71,10 +72,19 @@ public class Client implements Runnable {
     }
 
     public ArrayList<User> getUsers() throws IOException, ClassNotFoundException {
-        SocketMessage message = new SocketMessage(SocketMessage.Type.GET_USERS, null);
-        send(message);
-        SocketMessage reply = (SocketMessage) ois.readObject();
-        return (ArrayList<User>) reply.getMessageObject();
+        //SocketMessage message = new SocketMessage(SocketMessage.Type.GET_USERS, null);
+        //send(message);
+        //SocketMessage reply = (SocketMessage) ois.readObject();
+        //return (ArrayList<User>) reply.getMessageObject();
+
+        ArrayList<User> us = new ArrayList<>(Arrays.asList(
+            new User(0, "alex6446", null, "a64", 1),
+            new User(1, "linus", null, "li", 0)
+        ));
+        //SocketMessage reply = new SocketMessage(SocketMessage.Type.GET_USERS, us);
+        //return (ArrayList<User>) reply.getMessageObject();
+        return us;
+
     }
 
 }
