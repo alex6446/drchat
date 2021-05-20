@@ -2,25 +2,44 @@ package drchat.model;
 
 import java.io.Serializable;
 
+import javax.persistence.*;
+import javax.validation.constraints.*;
+
+@Entity
+@Table(name = "messages")
 public class Message implements Serializable {
 
-    public Message(int sid, int rid, String txt) {
-        sender_id = sid;
-        receiver_id = rid;
-        text = txt;
-    }
+    @Id
+    @NotNull
+    @GeneratedValue
+    private int id;
 
-    private int sender_id;
-    private int receiver_id; // global name for group
+    @NotNull
+    private int senderId;
+
+    @NotNull
+    private int receiverId; // global name for group
+
+    @NotNull
     private String text; 
 
-    public int getSenderID() { return sender_id; }
-    public int getReceiverID() { return receiver_id; }
+    public Message() {}
+
+    public Message(int senderId, int receiverId, String text) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.text = text;
+    }
+
+    public int getId() { return id; }
+    public int getSenderId() { return senderId; }
+    public int getReceiverId() { return receiverId; }
     public String getText() { return text; }
 
-    public void setSenderID(int id) { sender_id = id; }
-    public void setReceiverID(int id) { receiver_id = id; }
-    public void setText(String txt) { text = txt; }
+    public void setId(int id) { this.id = id; }
+    public void setSenderId(int senderId) { this.senderId = senderId; }
+    public void setReceiverId(int receiverId) { this.receiverId = receiverId; }
+    public void setText(String text) { this.text = text; }
 
 }
 

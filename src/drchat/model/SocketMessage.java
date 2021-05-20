@@ -7,17 +7,17 @@ public class SocketMessage implements Serializable {
     public enum Type { ACTIVATION, LOGIN, USER, MESSAGE, FAIL, GET_USERS };
 
     private Type type;
-    private Serializable msg;
+    private Serializable object;
 
     public SocketMessage() { } 
-    public SocketMessage(Type msgType, Serializable msgObj) {
-        this.type = msgType;
-        this.msg = msgObj;
+    public SocketMessage(Type type, Serializable object) {
+        this.type = type;
+        this.object = object;
     }
 
-    public Type getMessageType() { return type; }
-    public Serializable getMessageObject() { return msg; }
+    public Type getType() { return type; }
+    public Serializable getObject() { return object; }
 
-    public void setMessageType(Type msgType) { type = msgType; }
-    public void setMessageObject(Serializable msgObj) { msg = msgObj; }
+    public void setType(Type type) { this.type = type; }
+    public void setObject(Serializable object) { this.object = object; }
 }

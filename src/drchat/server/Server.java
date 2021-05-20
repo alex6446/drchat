@@ -9,6 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import drchat.model.Message;
 import drchat.model.SocketMessage;
 import drchat.model.User;
@@ -36,13 +46,14 @@ public class Server implements Runnable {
                 message = (SocketMessage) ois.readObject();
 
                 if (message != null) {
-                    switch (message.getMessageType()) {
+                    switch (message.getType()) {
                         case LOGIN:
-                            User user = (User) message.getMessageObject();
+                            User user = (User) message.getObject();
                             send(new SocketMessage(SocketMessage.Type.LOGIN, 0));
                             break;
                         case MESSAGE:
-                            Message msg = (Message) message.getMessageObject();
+                            Message msg = (Message) message.getObject();
+                            addMessage(msg);
                             msg.setText("SERVER:" + msg.getText());
                             System.out.println(msg.getText());
                             send(new SocketMessage(SocketMessage.Type.MESSAGE, msg));
@@ -59,6 +70,19 @@ public class Server implements Runnable {
     public void send(SocketMessage message) throws NullPointerException, IOException {
         oos.writeObject(message);
         oos.flush();
+    }
+    
+    public void addMessage(Message message) {
+
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        session.beginTransaction();
+
+        session.save(message);
+
+        session.getTransaction().commit();
+        session.close();
     }
 
     public static void main(String[] args) {

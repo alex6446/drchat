@@ -16,13 +16,13 @@ import drchat.model.User;
 public class Client implements Runnable {
 
     private Socket socket;
-    private ObjectOutputStream oos;
-    private ObjectInputStream ois;
+    private ObjectOutputStream output;
+    private ObjectInputStream input;
 
     public void connect(String hostname, int port) throws IOException {
         socket = new Socket(hostname, port);
-        oos = new ObjectOutputStream(socket.getOutputStream());
-        ois = new ObjectInputStream(socket.getInputStream());
+        output = new ObjectOutputStream(socket.getOutputStream());
+        input = new ObjectInputStream(socket.getInputStream());
     }
 
     @Override
@@ -31,15 +31,15 @@ public class Client implements Runnable {
         try {
             while (socket.isConnected()) {
                 SocketMessage message = null;
-                message = (SocketMessage) ois.readObject();
+                message = (SocketMessage) input.readObject();
 
                 if (message != null) {
-                    switch (message.getMessageType()) {
+                    switch (message.getType()) {
                         case MESSAGE:
-                            Login.getChat().updateMessages((Message) message.getMessageObject());
+                            Login.getChat().updateMessages((Message) message.getObject());
                             break;
                         case USER:
-                            Login.getChat().updateUsers((User) message.getMessageObject());
+                            Login.getChat().updateUsers((User) message.getObject());
                             break;
                     }
                 }
@@ -52,7 +52,7 @@ public class Client implements Runnable {
 
     public void activate() throws NullPointerException, IOException {
         SocketMessage greeting = new SocketMessage();
-        greeting.setMessageType(SocketMessage.Type.ACTIVATION);
+        greeting.setType(SocketMessage.Type.ACTIVATION);
         send(greeting);
     }
 
@@ -62,13 +62,13 @@ public class Client implements Runnable {
         user.setPassword(password);
         SocketMessage message = new SocketMessage(SocketMessage.Type.LOGIN, user);
         send(message);
-        SocketMessage reply = (SocketMessage) ois.readObject();
-        return (int) reply.getMessageObject();
+        SocketMessage reply = (SocketMessage) input.readObject();
+        return (int) reply.getObject();
     }
 
     public void send(SocketMessage message) throws NullPointerException, IOException {
-        oos.writeObject(message);
-        oos.flush();
+        output.writeObject(message);
+        output.flush();
     }
 
     public ArrayList<User> getUsers() throws IOException, ClassNotFoundException {

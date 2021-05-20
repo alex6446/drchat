@@ -28,6 +28,9 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
+    implementation 'org.hibernate:hibernate-core:5.4.31.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:6.0.22.Final'
 }
 
 application {
