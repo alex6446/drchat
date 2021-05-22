@@ -49,7 +49,7 @@ public class Server implements Runnable {
                     switch (message.getType()) {
                         case LOGIN:
                             User user = (User) message.getObject();
-                            send(new SocketMessage(SocketMessage.Type.LOGIN, 0));
+                            send(new SocketMessage(SocketMessage.Type.LOGIN, 1));
                             break;
                         case MESSAGE:
                             Message msg = (Message) message.getObject();

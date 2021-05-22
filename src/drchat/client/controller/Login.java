@@ -1,7 +1,6 @@
 package drchat.client.controller;
 
 import javafx.scene.*;
-import javafx.scene.layout.*;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -20,6 +19,8 @@ public class Login implements Initializable {
 
     private static Client client = new Client();
     private static Chat chat;
+
+    private static Scene scene;
 
     @FXML
     private TextField username;
@@ -49,18 +50,29 @@ public class Login implements Initializable {
             chat = new Chat(id);
             fxmlLoader.setController(chat);
             App.getPrimaryStage().setScene(new Scene(fxmlLoader.load()));
+            chat.load();
             Thread listener = new Thread(client);
             listener.start();
         }
     }
 
-    public static Client getClient() {
-        return client;
+    @FXML
+    public void register() throws Exception {
+        App.getPrimaryStage().setScene(new Scene(
+            FXMLLoader.load(getClass().getResource("/fxml/register.fxml"))
+        ));
     }
 
-    public static Chat getChat() {
-        return chat;
+    public static void load() throws IOException {
+        if (scene == null) {
+            scene = new Scene(FXMLLoader.load(Login.class.getResource("/fxml/login.fxml")));
+        }
+        App.getPrimaryStage().setScene(scene);
     }
+
+    public static Scene getScene() { return Login.scene; }
+    public static Client getClient() { return client; }
+    public static Chat getChat() { return chat; }
 
     public static void alert(String title, String header, String content) {
         Platform.runLater(()-> {

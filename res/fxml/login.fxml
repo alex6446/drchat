@@ -23,24 +23,24 @@
             </ImageView>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label text="USERNAME" />
-                  <TextField fx:id="username">
+                  <VBox alignment="CENTER_RIGHT" spacing="18.0">
+                     <children>
+                        <Label text="USERNAME" />
+                        <Label text="PASSWORD" />
+                     </children>
                      <HBox.margin>
-                        <Insets left="1.5" />
+                        <Insets />
                      </HBox.margin>
-                  </TextField>
+                  </VBox>
+                  <VBox spacing="10.0">
+                     <children>
+                        <TextField fx:id="username" />
+                        <PasswordField fx:id="password" />
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets top="50.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" spacing="10.0">
-               <children>
-                  <Label text="PASSWORD" />
-                  <PasswordField fx:id="password" />
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" spacing="25.0">
@@ -50,7 +50,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefWidth="125.0" styleClass="white-border" text="REGISTER" />
+                  <Button mnemonicParsing="false" onAction="#register" prefWidth="125.0" styleClass="white-border" text="REGISTER" />
                </children>
                <VBox.margin>
                   <Insets top="25.0" />

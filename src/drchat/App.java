@@ -1,15 +1,8 @@
 package drchat;
 
+import drchat.client.controller.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
-//import javafx.scene.image.Image;
-//import javafx.scene.control.Label;
-//import javafx.geometry.Pos;
-import javafx.fxml.FXMLLoader;
-
-//import java.io.*;
 
 public class App extends Application {
 
@@ -22,10 +15,7 @@ public class App extends Application {
     @Override
     public void start(Stage primary) throws Exception {
         primaryStage = primary;
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
-        //Parent root = FXMLLoader.load(getClass().getResource("/fxml/message.fxml"));
-
-        primaryStage.setScene(new Scene(root));
+        Login.load();
         primaryStage.show();
     }
 

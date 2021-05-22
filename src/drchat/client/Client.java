@@ -12,6 +12,7 @@ import drchat.client.controller.Login;
 import drchat.model.Message;
 import drchat.model.SocketMessage;
 import drchat.model.User;
+import javafx.application.Platform;
 
 public class Client implements Runnable {
 
@@ -27,6 +28,7 @@ public class Client implements Runnable {
 
     @Override
     public void run() throws NullPointerException {
+
         
         try {
             while (socket.isConnected()) {
@@ -78,8 +80,10 @@ public class Client implements Runnable {
         //return (ArrayList<User>) reply.getMessageObject();
 
         ArrayList<User> us = new ArrayList<>(Arrays.asList(
-            new User(0, "alex6446", null, "a64", 1),
-            new User(1, "linus", null, "li", 0)
+            new User(0, "alex6446", null, "a64", 0),
+            new User(2, "Zloy", null, "Zy", 4),
+            new User(3, "GreenWay", null, "GW", 3),
+            new User(1, "linus", null, "li", 1)
         ));
         //SocketMessage reply = new SocketMessage(SocketMessage.Type.GET_USERS, us);
         //return (ArrayList<User>) reply.getMessageObject();

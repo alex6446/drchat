@@ -35,13 +35,13 @@ public class User implements Serializable {
         this.colorIndex = colorIndex;
     }
 
-    public int getID() { return id; }
+    public int getId() { return id; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
     public String getShortname() { return shortname; }
     public int getColorIndex() { return colorIndex; }
 
-    public void setID(int id) { this.id = id; }
+    public void setId(int id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { this.password = password; }
     public void setSHortname(String shortname) { this.shortname = shortname; }

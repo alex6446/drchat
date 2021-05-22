@@ -23,12 +23,12 @@ import javax.persistence.criteria.Root;
 import drchat.model.Message;
 import drchat.model.SocketMessage;
 import drchat.model.User;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 
-public class Chat implements Initializable {
+public class Chat {
 
     private int userId;
     private int roomId = -1; // -1 for global
@@ -39,12 +39,14 @@ public class Chat implements Initializable {
         this.userId = userId;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void load() {
 
-        // actually should load from bd
-        loadUsers();
-        loadMessages(-1);
+        new Thread(()-> {
+            Platform.runLater(()-> {
+                loadUsers();
+                loadRoom(-1);
+            });
+        }).start();
 
     }
 
@@ -87,9 +89,9 @@ public class Chat implements Initializable {
 
     private void addMessage(Message message) {
         try {
-            HBox msgBox = FXMLLoader.load(getClass().getResource("/fxml/message.fxml"));
-            Node msgText = msgBox.getChildren().get(1);
-            ((Label)msgText).setText(message.getText());
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/message.fxml"));
+            fxmlLoader.setController(new drchat.client.controller.Message(message));
+            HBox msgBox = fxmlLoader.load();
             msgContainer.getChildren().add(0, msgBox);
         }
         catch (IOException e) {
@@ -99,9 +101,12 @@ public class Chat implements Initializable {
 
     private void addUser(User user) {
         try {
-            HBox usrBox = FXMLLoader.load(getClass().getResource("/fxml/user.fxml"));
-            ((Label)usrBox.getChildren().get(1)).setText(user.getUsername());
-            usrContainer.getChildren().add(0, new HBox(usrBox));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+            fxmlLoader.setController(new drchat.client.controller.User(user));
+            HBox usrBox = fxmlLoader.load();
+
+            usrContainer.getChildren().add(0, usrBox);
+            usrBox.autosize();
         } catch (IOException e) {
             Login.alert("File Load Error", "Cannot load user.fxml", "Check if user.fxml exist");
         }
@@ -116,11 +121,12 @@ public class Chat implements Initializable {
             System.out.println("cannot load users");
         }
         for (User u : users) {
-            addUser(u);
+            if (u.getId() != userId)
+                addUser(u);
         }
     }
 
-    private void loadMessages(int rid) {
+    private void loadMessages(int receiverId) {
         // bd code goes here
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -139,5 +145,19 @@ public class Chat implements Initializable {
 
         //msgContainer.getChildren().clear();
     }
+
+    public User getUser(int userId) {
+        for (User u : users) {
+            if (u.getId() == userId)
+                return u;
+        }
+        return null;
+    }
+
+    public void loadRoom(int receiverId) {
+        loadMessages(-1);
+        System.out.println("loaded room " + receiverId);
+    }
+
 }
 

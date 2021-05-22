@@ -19,49 +19,49 @@
 <?import javafx.scene.text.Font?>
 
 <HBox spacing="10.0" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-        <VBox alignment="TOP_CENTER" HBox.hgrow="NEVER">
-           <children>
-              <BorderPane maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0">
-                 <styleClass>
-                    <String fx:value="msg-bg-orange" />
-                    <String fx:value="avatar-border" />
-                 </styleClass>
-                 <center>
-                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                       <image>
-                           <Image url="@../icons/ILTQq.png" />
-                       </image>
-                    </ImageView>
-                 </center>
-                 <VBox.margin>
-                    <Insets />
-                 </VBox.margin>
-              </BorderPane>
-              <Label alignment="CENTER" maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="linus">
-                 <font>
-                    <Font size="12.0" />
-                 </font>
-              </Label>
-           </children>
-           <HBox.margin>
-              <Insets left="5.0" top="5.0" />
-           </HBox.margin>
+    <children>
+        <VBox fx:id="avatar" alignment="TOP_CENTER" HBox.hgrow="NEVER">
+            <children>
+                <BorderPane maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0">
+                    <styleClass>
+                        <String fx:value="av-bg-grey" />
+                        <String fx:value="avatar-border" />
+                    </styleClass>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <center>
+                        <Label text="a64" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                    </center>
+                </BorderPane>
+                <Label alignment="CENTER" maxWidth="66.0" minWidth="66.0" prefWidth="65.0" text="alex6446" wrapText="true">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Label>
+            </children>
+            <HBox.margin>
+                <Insets left="5.0" top="5.0" />
+            </HBox.margin>
         </VBox>
-        <Label maxWidth="400.0" text="Message that somehow did not work Message that somehow did not work Message that somehow did not work Message that somehow did not work " wrapText="true">
-           <HBox.margin>
-              <Insets bottom="5.0" right="5.0" top="5.0" />
-           </HBox.margin>
-           <padding>
-              <Insets bottom="15.0" left="15.0" right="10.0" top="15.0" />
-           </padding>
-           <styleClass>
-              <String fx:value="msg-border" />
-              <String fx:value="msg-bg-orange" />
-           </styleClass>
-           <font>
-              <Font size="14.0" />
-           </font>
+        <Label fx:id="text" maxWidth="400.0" text="Message that somehow did not work " wrapText="true">
+            <HBox.margin>
+                <Insets bottom="5.0" right="5.0" top="5.0" />
+            </HBox.margin>
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="10.0" top="15.0" />
+            </padding>
+            <styleClass>
+                <String fx:value="msg-border" />
+                <String fx:value="msg-bg-grey" />
+            </styleClass>
+            <font>
+                <Font size="14.0" />
+            </font>
         </Label>
-  </children>
+    </children>
 </HBox>
