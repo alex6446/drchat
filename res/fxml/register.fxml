@@ -12,15 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0"
-    styleClass="bg-dark" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="drchat.client.controller.Register">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="bg-dark" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drchat.client.controller.Register">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" spacing="10.0" stylesheets="@../style/main.css">
+            <HBox alignment="TOP_CENTER" spacing="10.0" stylesheets="@../style/main.css">
                <children>
-                  <VBox alignment="TOP_CENTER" HBox.hgrow="NEVER">
+                  <VBox fx:id="avatar" alignment="TOP_CENTER" HBox.hgrow="NEVER">
                      <children>
                         <BorderPane maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0">
                            <styleClass>
@@ -48,7 +46,7 @@
                         <Insets left="5.0" top="5.0" />
                      </HBox.margin>
                   </VBox>
-                  <Label maxWidth="400.0" text="Message." wrapText="true">
+                  <Label fx:id="text" maxWidth="400.0" text="Message." wrapText="true">
                      <HBox.margin>
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -88,15 +86,15 @@
                   </VBox>
                   <VBox spacing="10.0">
                      <children>
-                        <TextField fx:id="username" />
+                        <TextField fx:id="username" onKeyTyped="#updateUsername" />
                         <PasswordField fx:id="password" />
-                        <PasswordField fx:id="password1" />
-                        <TextField fx:id="username1">
+                        <PasswordField fx:id="repeat" />
+                        <TextField fx:id="shortname" onKeyTyped="#updateShortname">
                            <VBox.margin>
                               <Insets top="25.0" />
                            </VBox.margin>
                         </TextField>
-                        <Spinner />
+                        <Spinner fx:id="color" />
                      </children>
                   </VBox>
                </children>
