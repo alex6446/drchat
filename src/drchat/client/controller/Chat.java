@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import drchat.client.Color;
 import drchat.database.DatabaseConnection;
 import drchat.model.Message;
 import drchat.model.SocketMessage;
@@ -35,11 +36,18 @@ public class Chat {
         new Thread(()-> {
             Platform.runLater(()-> {
                 loadUsers();
+                User user = getUser(userId);
+                ((BorderPane) avatar.getChildren().get(0)).setStyle(Color.codes[user.getColorIndex()].getAvatarCss());
+                ((Label) ((BorderPane) avatar.getChildren().get(0)).getCenter()).setText(user.getShortname());
+                ((Label) avatar.getChildren().get(1)).setText(user.getUsername());
                 rooms.get(0).select();
             });
         }).start();
 
     }
+
+    @FXML
+    private VBox avatar; 
 
     @FXML
     private VBox msgContainer;
@@ -59,6 +67,11 @@ public class Chat {
             Login.getClient().send(new SocketMessage(SocketMessage.Type.MESSAGE, message));
         }
             
+    }
+
+    @FXML
+    public void logout() throws IOException {
+        Login.logout();
     }
 
     public void updateMessages(Message message) {

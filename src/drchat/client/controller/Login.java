@@ -23,6 +23,8 @@ public class Login implements Initializable {
     private static Client client = new Client();
     private static Chat chat;
 
+    private static Thread listener;
+
     private static Scene scene;
 
     @FXML
@@ -54,7 +56,8 @@ public class Login implements Initializable {
             fxmlLoader.setController(chat);
             App.getPrimaryStage().setScene(new Scene(fxmlLoader.load()));
             chat.load();
-            Thread listener = new Thread(client);
+            listener = new Thread(client);
+            client.activate();
             listener.start();
         }
     }
@@ -64,6 +67,11 @@ public class Login implements Initializable {
         App.getPrimaryStage().setScene(new Scene(
             FXMLLoader.load(getClass().getResource("/fxml/register.fxml"))
         ));
+    }
+
+    public static void logout() throws IOException {
+        client.deactivate();
+        Login.load();
     }
 
     public static void load() throws IOException {

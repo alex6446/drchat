@@ -21,21 +21,55 @@
          <items>
             <VBox>
                <children>
-                  <VBox alignment="CENTER">
+                  <HBox alignment="TOP_CENTER" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <children>
-                        <TextArea fx:id="inputArea" maxHeight="50.0" maxWidth="-Infinity" opacity="0.7" prefHeight="50.0" prefWidth="400.0" wrapText="true" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="2.0" top="2.0" />
-                           </padding>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextArea>
-                        <HBox alignment="CENTER" prefWidth="200.0" spacing="25.0">
+                        <VBox fx:id="avatar" alignment="TOP_CENTER">
                            <children>
+                              <BorderPane maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0">
+                                 <styleClass>
+                                    <String fx:value="av-bg-orange" />
+                                    <String fx:value="avatar-border" />
+                                 </styleClass>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <center>
+                                    <Label style="-fx-text-fill: #dbdbdb;" text="li" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                              </BorderPane>
+                              <Label alignment="CENTER" maxWidth="66.0" minWidth="66.0" prefWidth="66.0" text="linus">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <TextArea fx:id="inputArea" maxHeight="50.0" maxWidth="-Infinity" opacity="0.7" prefHeight="50.0" prefWidth="400.0" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="2.0" top="2.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextArea>
                               <Button mnemonicParsing="false" onAction="#sendMessage" prefWidth="200.0" text="POST!">
                                  <opaqueInsets>
                                     <Insets />
@@ -45,15 +79,20 @@
                                  </font>
                               </Button>
                            </children>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                           <opaqueInsets>
+                           <HBox.margin>
                               <Insets />
-                           </opaqueInsets>
-                        </HBox>
+                           </HBox.margin>
+                        </VBox>
+                        <Label onMouseClicked="#logout" styleClass="fg-hover-dark" text="">
+                           <HBox.margin>
+                              <Insets right="50.0" top="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </VBox>
+                  </HBox>
               <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="-1.0" prefWidth="-1.0" styleClass="bg-dark" VBox.vgrow="ALWAYS">
                      <content>
                         <VBox fx:id="msgContainer">

@@ -20,6 +20,8 @@ public class Client implements Runnable {
     private ObjectOutputStream output;
     private ObjectInputStream input;
 
+    boolean isRunning = false;
+
     public void connect(String hostname, int port) throws IOException {
         socket = new Socket(hostname, port);
         output = new ObjectOutputStream(socket.getOutputStream());
@@ -30,8 +32,7 @@ public class Client implements Runnable {
     public void run() throws NullPointerException {
 
         try {
-            activate();
-            while (socket.isConnected()) {
+            while (isRunning) {
                 SocketMessage message = null;
                 message = (SocketMessage) input.readObject();
 
@@ -43,6 +44,8 @@ public class Client implements Runnable {
                         case USER:
                             Login.getChat().updateUsers((User) message.getObject());
                             break;
+                        case ACTIVATION:
+                            isRunning = !isRunning;
                     }
                 }
             }
@@ -69,11 +72,20 @@ public class Client implements Runnable {
         return (int) reply.getObject();
     }
 
-    public void activate() throws NullPointerException, IOException {
+    public void activate() throws NullPointerException, IOException, ClassNotFoundException {
+        SocketMessage greeting = new SocketMessage();
+        greeting.setType(SocketMessage.Type.ACTIVATION);
+        send(greeting);
+        SocketMessage reply = (SocketMessage) input.readObject();
+        isRunning = true;
+    }
+
+    public void deactivate() throws NullPointerException, IOException {
         SocketMessage greeting = new SocketMessage();
         greeting.setType(SocketMessage.Type.ACTIVATION);
         send(greeting);
     }
+
 
     public void send(SocketMessage message) throws NullPointerException, IOException {
         output.writeObject(message);

@@ -50,6 +50,7 @@ public class ClientHandler implements Runnable {
                 if (message != null) {
                     switch (message.getType()) {
                         case LOGIN: {
+                            userId = -1;
                             User user = (User) message.getObject();
                             for (User e : Server.getUsers()) {
                                 if (e.getUsername().equals(user.getUsername()) &&
@@ -76,7 +77,8 @@ public class ClientHandler implements Runnable {
                             if (id != -1) notifyNewUser(user);
                             break; }
                         case ACTIVATION:
-                            activated = true;
+                            activated = !activated;
+                            send(message);
                             break;
                     }
                 }
