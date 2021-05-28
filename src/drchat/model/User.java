@@ -11,7 +11,7 @@ public class User implements Serializable {
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(generator="user_sequence", strategy=GenerationType.SEQUENCE)
     private int id;
 
     @NotNull
@@ -44,7 +44,7 @@ public class User implements Serializable {
     public void setId(int id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { this.password = password; }
-    public void setSHortname(String shortname) { this.shortname = shortname; }
+    public void setShortname(String shortname) { this.shortname = shortname; }
     public void setColorIndex(int colorIndex) { this.colorIndex = colorIndex; }
 
 }

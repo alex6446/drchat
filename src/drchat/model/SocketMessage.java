@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class SocketMessage implements Serializable {
 
-    public enum Type { ACTIVATION, LOGIN, USER, MESSAGE, FAIL, GET_USERS };
+    public enum Type { REGISTER, LOGIN, ACTIVATION, MESSAGE, USER };
 
     private Type type;
     private Serializable object;

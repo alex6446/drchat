@@ -29,8 +29,8 @@ public class Client implements Runnable {
     @Override
     public void run() throws NullPointerException {
 
-        
         try {
+            activate();
             while (socket.isConnected()) {
                 SocketMessage message = null;
                 message = (SocketMessage) input.readObject();
@@ -52,10 +52,11 @@ public class Client implements Runnable {
         }
     }
 
-    public void activate() throws NullPointerException, IOException {
-        SocketMessage greeting = new SocketMessage();
-        greeting.setType(SocketMessage.Type.ACTIVATION);
-        send(greeting);
+    public int register(User user) throws IOException, ClassNotFoundException {
+        SocketMessage message = new SocketMessage(SocketMessage.Type.REGISTER, user);
+        send(message);
+        SocketMessage reply = (SocketMessage) input.readObject();
+        return (int) reply.getObject();
     }
 
     public int login(String username, String password) throws IOException, ClassNotFoundException {
@@ -68,27 +69,15 @@ public class Client implements Runnable {
         return (int) reply.getObject();
     }
 
+    public void activate() throws NullPointerException, IOException {
+        SocketMessage greeting = new SocketMessage();
+        greeting.setType(SocketMessage.Type.ACTIVATION);
+        send(greeting);
+    }
+
     public void send(SocketMessage message) throws NullPointerException, IOException {
         output.writeObject(message);
         output.flush();
-    }
-
-    public ArrayList<User> getUsers() throws IOException, ClassNotFoundException {
-        //SocketMessage message = new SocketMessage(SocketMessage.Type.GET_USERS, null);
-        //send(message);
-        //SocketMessage reply = (SocketMessage) ois.readObject();
-        //return (ArrayList<User>) reply.getMessageObject();
-
-        ArrayList<User> us = new ArrayList<>(Arrays.asList(
-            new User(0, "alex6446", null, "a64", 0),
-            new User(2, "Zloy", null, "Zy", 4),
-            new User(3, "GreenWay", null, "GW", 3),
-            new User(1, "linus", null, "li", 1)
-        ));
-        //SocketMessage reply = new SocketMessage(SocketMessage.Type.GET_USERS, us);
-        //return (ArrayList<User>) reply.getMessageObject();
-        return us;
-
     }
 
 }

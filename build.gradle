@@ -36,7 +36,7 @@ dependencies {
 application {
     // Define the main class for the application.
     //mainClass = 'drchat.App'
-    mainClassName = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "drchat.App"
+    mainClassName = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "drchat.client.App"
 }
 
 sourceSets {

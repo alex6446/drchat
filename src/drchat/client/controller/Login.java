@@ -12,10 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
-import drchat.App;
+import drchat.client.App;
 import drchat.client.Client;
 
 public class Login implements Initializable {
+
+    private static String SERVER_IP = "localhost";
+    private static int SERVER_PORT = 6446;
 
     private static Client client = new Client();
     private static Chat chat;
@@ -30,7 +33,7 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try { client.connect("localhost", 6446); }
+        try { client.connect(SERVER_IP, SERVER_PORT); }
         catch (IOException e) {
             alert("Connection Failed", "Cannot connect to the server.", "Please run the server and restart the application.");
         }
@@ -38,10 +41,10 @@ public class Login implements Initializable {
 
     @FXML
     public void login() throws Exception {
-        //if (username.getText().isBlank() || password.getText().isBlank()) {
-            //alert("Login Failed", "Fill in username and password", "");
-            //return;
-        //}
+        if (username.getText().isBlank() || password.getText().isBlank()) {
+            alert("Login Failed", "Fill in username and password", "");
+            return;
+        }
         int id = client.login(username.getText(), password.getText());
         if (id == -1) {
             alert("Login Failed", "Incorrect username or password", "Please try again");

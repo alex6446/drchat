@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import drchat.App;
 import drchat.client.Color;
+import drchat.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -55,8 +55,31 @@ public class Register implements Initializable {
     }
 
     @FXML
-    public void register() {
+    public void register() throws IOException, ClassNotFoundException {
         // validate all data and send to server for check
+        if (username.getText().isBlank() || password.getText().isBlank() ||
+            repeat.getText().isBlank() || shortname.getText().isBlank()) {
+            Login.alert("Validation Error", "Please fill in all fields", "");
+            return;
+        } else if (!password.getText().equals(repeat.getText())) {
+            Login.alert("Validation Error", "Repeated passwords do not match", "");
+            return;
+        }
+
+        User user = new User();
+        user.setUsername(username.getText());
+        user.setShortname(shortname.getText());
+        user.setPassword(password.getText());
+        user.setColorIndex(color.getValue());
+
+        int id = Login.getClient().register(user);
+        if (id == -1) {
+            Login.alert("Validation Error", "User already exists", "");
+        } else {
+            back();
+        }
+
+
     }
 
     @FXML

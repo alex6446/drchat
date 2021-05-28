@@ -1,10 +1,8 @@
 package drchat.client.controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import drchat.App;
 import drchat.client.Color;
 import drchat.model.User;
 import javafx.fxml.FXML;

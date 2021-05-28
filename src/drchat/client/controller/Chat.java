@@ -1,25 +1,15 @@
 package drchat.client.controller;
 
-import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
+import drchat.database.DatabaseConnection;
 import drchat.model.Message;
 import drchat.model.SocketMessage;
 import drchat.model.User;
@@ -33,7 +23,8 @@ public class Chat {
     private int userId;
     private int roomId = -1; // -1 for global
 
-    private ArrayList<User> users;
+    private List<User> users;
+    private List<Room> rooms;
 
     public Chat(int userId) {
         this.userId = userId;
@@ -44,7 +35,7 @@ public class Chat {
         new Thread(()-> {
             Platform.runLater(()-> {
                 loadUsers();
-                loadRoom(-1);
+                rooms.get(0).select();
             });
         }).start();
 
@@ -68,23 +59,34 @@ public class Chat {
             Login.getClient().send(new SocketMessage(SocketMessage.Type.MESSAGE, message));
         }
             
-        System.out.println("Hi");
     }
 
     public void updateMessages(Message message) {
         // if room_id doesnt match then just send notification
-        System.out.println(message.getText());
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                addMessage(message);
-            }
-        });
-        //addMessage(message);
+        if (message.getReceiverId() == -1 && roomId == -1 ||
+            message.getReceiverId() == userId && message.getSenderId() == roomId ||
+            message.getReceiverId() == roomId && message.getSenderId() == userId) {
+            System.out.println(message.getText());
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    addMessage(message);
+                }
+            });
+        }
     }
 
     public void updateUsers(User user) {
-        // if new user then add, if new status then update
+        for (User e : users)
+            if (e.getId() == user.getId())
+                return;
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                users.add(user);
+                addUser(user);
+            }
+        });
     }
 
     private void addMessage(Message message) {
@@ -102,10 +104,13 @@ public class Chat {
     private void addUser(User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
-            fxmlLoader.setController(new drchat.client.controller.User(user));
+            Room room = new Room(user);
+            fxmlLoader.setController(room);
             HBox usrBox = fxmlLoader.load();
+            room.setBox(usrBox);
+            rooms.add(room);
 
-            usrContainer.getChildren().add(0, usrBox);
+            usrContainer.getChildren().add(usrBox);
             usrBox.autosize();
         } catch (IOException e) {
             Login.alert("File Load Error", "Cannot load user.fxml", "Check if user.fxml exist");
@@ -113,37 +118,49 @@ public class Chat {
     }
 
     private void loadUsers() {
-        // bd code goes here
+        rooms = new ArrayList<Room>();
         usrContainer.getChildren().clear();
-        try {
-            users = new ArrayList<>(Login.getClient().getUsers());
-        } catch (Exception e) {
-            System.out.println("cannot load users");
+        try (Session session = DatabaseConnection.getSession()) {
+            session.beginTransaction();
+            users = (List<User>) session.createQuery("from " + User.class.getName()).list();
+            session.getTransaction().commit();
         }
+        addUser(new User(-1, "Global", null, "@", 1));
         for (User u : users) {
             if (u.getId() != userId)
                 addUser(u);
         }
     }
 
-    private void loadMessages(int receiverId) {
-        // bd code goes here
+    private void loadMessages() {
 
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+        msgContainer.getChildren().clear();
+        List<Message> messages;
+        String query = "from " + Message.class.getName() + " where ";
+        if (roomId == -1) query += "receiverId = -1";
+        else query += "receiverId = " + userId + " and senderId = " + roomId +
+             " or " + "receiverId = " + roomId + " and senderId = " + userId;
 
-        session.beginTransaction();
 
-        List<Message> messages = (List<Message>) session.createQuery("FROM Message").list();
-
-        session.getTransaction().commit();
-        session.close();
-
-        for (Message msg : messages) {
-            addMessage(msg);
+        try (Session session = DatabaseConnection.getSession()) {
+            session.beginTransaction();
+            messages =  (List<Message>) session.createQuery(query).list();
+            session.getTransaction().commit();
         }
 
-        //msgContainer.getChildren().clear();
+        for (Message msg : messages)
+            addMessage(msg);
+
+    }
+
+    public void loadRoom(int receiverId) {
+        for (Room e : rooms)
+            if (e.getId() == roomId && receiverId != roomId)
+                e.deselect();
+
+        roomId = receiverId;
+        loadMessages();
+        System.out.println("loaded room " + receiverId);
     }
 
     public User getUser(int userId) {
@@ -152,11 +169,6 @@ public class Chat {
                 return u;
         }
         return null;
-    }
-
-    public void loadRoom(int receiverId) {
-        loadMessages(-1);
-        System.out.println("loaded room " + receiverId);
     }
 
 }

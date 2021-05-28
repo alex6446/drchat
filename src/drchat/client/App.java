@@ -1,4 +1,4 @@
-package drchat;
+package drchat.client;
 
 import drchat.client.controller.Login;
 import javafx.application.Application;

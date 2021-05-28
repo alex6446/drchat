@@ -11,7 +11,7 @@ public class Message implements Serializable {
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(generator="message_sequence", strategy=GenerationType.SEQUENCE)
     private int id;
 
     @NotNull

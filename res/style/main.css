@@ -95,6 +95,13 @@
    -fx-text-fill: #dbdbdb; 
 }
 .bg-hover-dark:hover {
+    -fx-base: rgba(0, 0, 0, 0.3);
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+   /*-fx-text-fill: #f4f4f4; */
+   -fx-text-fill: #dbdbdb; 
+}
+
+.bg-selected-dark {
     -fx-base: #000000;
     -fx-background-color: #000000;
    /*-fx-text-fill: #f4f4f4; */
