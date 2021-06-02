@@ -87,6 +87,9 @@
     -fx-background-color: #970007;
 }
 
+.msg-notify {
+    -fx-text-fill: #00ff00;
+}
 
 .bg-dark {
     -fx-base: #000000;

@@ -4,7 +4,7 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/test</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/drdb</property>
         <property name="connection.username">alex6446</property>
         <property name="connection.password">64</property>
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
@@ -14,6 +14,10 @@
         <!--<property name="format_sql">true</property>-->
 
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+
 
         <mapping class="drchat.model.Message"/>
         <mapping class="drchat.model.User"/>

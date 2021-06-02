@@ -56,6 +56,7 @@ public class ClientHandler implements Runnable {
                                 if (e.getUsername().equals(user.getUsername()) &&
                                     e.getPassword().equals(user.getPassword())) {
                                         userId = e.getId();
+                                        System.out.println("[SERVER] New login from " + e.getUsername());
                                         break;
                                     }
                             }
@@ -65,15 +66,11 @@ public class ClientHandler implements Runnable {
                             Message msg = (Message) message.getObject();
                             addMessage(msg);
                             notifyNewMessage(msg);
-
-                            System.out.println(msg.getText());
-
                             break; }
                         case REGISTER: {
                             User user = (User) message.getObject();
                             int id = addUser(user);
                             send(new SocketMessage(SocketMessage.Type.REGISTER, id));
-                            System.out.println(id);
                             if (id != -1) notifyNewUser(user);
                             break; }
                         case ACTIVATION:
@@ -84,8 +81,10 @@ public class ClientHandler implements Runnable {
                 }
             }
 
-        } catch (IOException | ClassNotFoundException e) {
+            oos.close();
+            ois.close();
 
+        } catch (IOException | ClassNotFoundException e) {
         }
     }
 
@@ -123,11 +122,16 @@ public class ClientHandler implements Runnable {
 
     public void notifyNewUser(User user) throws IOException {
         // send USER to all active users
+        System.out.println("[SERVER] New registration: " + user.getUsername());
         sendAll(new SocketMessage(SocketMessage.Type.USER, user));
     }
     
     public void notifyNewMessage(Message message) throws IOException {
         // send message to whome it belongs
+        String rec;
+        if (message.getReceiverId() == -1) rec = "Global"; 
+        else rec = "" + message.getReceiverId();
+        System.out.println("[SERVER] New message from " + message.getSenderId() + " to " + rec + ": " + message.getText());
         SocketMessage msg = new SocketMessage(SocketMessage.Type.MESSAGE, message);
         if (message.getReceiverId() == -1)
             sendAll(msg);

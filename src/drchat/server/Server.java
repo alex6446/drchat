@@ -30,11 +30,12 @@ public class Server implements Runnable {
             loadUsers();
             listener = new ServerSocket(PORT);
             while (isRunning) {
+                System.out.println("[SERVER] Waiting for client connection...");
                 Socket socket = listener.accept();
                 ClientHandler client = new ClientHandler(socket);
                 clinets.add(client);
                 new Thread(client).start();
-                System.out.println("got connection from: " + socket.toString());
+                System.out.println("[SERVER] New connection from: " + socket.toString());
             }
 
         } catch (IOException e) {

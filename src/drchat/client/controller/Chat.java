@@ -76,14 +76,24 @@ public class Chat {
 
     public void updateMessages(Message message) {
         // if room_id doesnt match then just send notification
+        System.out.println(message.getText());
         if (message.getReceiverId() == -1 && roomId == -1 ||
             message.getReceiverId() == userId && message.getSenderId() == roomId ||
             message.getReceiverId() == roomId && message.getSenderId() == userId) {
-            System.out.println(message.getText());
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     addMessage(message);
+                }
+            });
+        } else {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    int id = message.getReceiverId() == -1 ? -1 : message.getSenderId();
+                    for (Room e : rooms)
+                        if (e.getId() == id)
+                            e.notifyNewMessage();
                 }
             });
         }

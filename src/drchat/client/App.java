@@ -2,6 +2,7 @@ package drchat.client;
 
 import drchat.client.controller.Login;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -17,6 +18,7 @@ public class App extends Application {
         primaryStage = primary;
         Login.load();
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e -> Login.exit());
     }
 
     public static void main(String[] args) {

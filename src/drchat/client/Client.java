@@ -51,7 +51,7 @@ public class Client implements Runnable {
             }
 
         } catch (IOException | ClassNotFoundException e) {
-
+            System.out.println("Error while running client.");
         }
     }
 
@@ -90,6 +90,13 @@ public class Client implements Runnable {
     public void send(SocketMessage message) throws NullPointerException, IOException {
         output.writeObject(message);
         output.flush();
+    }
+
+    public void exit() {
+        try {
+            input.close();
+            output.close();
+        } catch (IOException e) {}
     }
 
 }

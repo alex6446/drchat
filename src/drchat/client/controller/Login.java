@@ -81,6 +81,12 @@ public class Login implements Initializable {
         App.getPrimaryStage().setScene(scene);
     }
 
+    public static void exit() {
+        Platform.exit();
+        client.exit();
+        System.exit(0);
+    }
+
     public static Scene getScene() { return Login.scene; }
     public static Client getClient() { return client; }
     public static Chat getChat() { return chat; }

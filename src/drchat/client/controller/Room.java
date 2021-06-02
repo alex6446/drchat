@@ -30,6 +30,7 @@ public class Room implements Initializable {
     @FXML
     public void select() {
         box.getStyleClass().clear();
+        name.getStyleClass().remove("msg-notify");
         box.getStyleClass().add("bg-selected-dark");
         Login.getChat().loadRoom(user.getId());
     }
@@ -37,6 +38,10 @@ public class Room implements Initializable {
     public void deselect() {
         box.getStyleClass().clear();
         box.getStyleClass().add("bg-hover-dark");
+    }
+
+    public void notifyNewMessage() {
+        name.getStyleClass().add("msg-notify");
     }
 
     @Override
