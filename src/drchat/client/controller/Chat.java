@@ -75,18 +75,20 @@ public class Chat {
     }
 
     @FXML
-    public void search() throws Exception {
-        for (int i = 0; i < usrContainer.getChildren().size(); i++) {
-            if (((Label) ((HBox) usrContainer.getChildren().get(i)).getChildren().get(1)).getText().contains(searchField.getText()) ||
-                       searchField.getText().isEmpty()) {
-                usrContainer.getChildren().get(i).setManaged(true);
-                usrContainer.getChildren().get(i).setVisible(true);
-            } else {
-                usrContainer.getChildren().get(i).setManaged(false);
-                usrContainer.getChildren().get(i).setVisible(false);
+    public void search() {
+        try {
+            for (int i = 0; i < usrContainer.getChildren().size(); i++) {
+                if (((Label) ((HBox) usrContainer.getChildren().get(i)).getChildren().get(1)).getText().contains(searchField.getText()) ||
+                        searchField.getText().isEmpty()) {
+                    usrContainer.getChildren().get(i).setManaged(true);
+                    usrContainer.getChildren().get(i).setVisible(true);
+                } else {
+                    usrContainer.getChildren().get(i).setManaged(false);
+                    usrContainer.getChildren().get(i).setVisible(false);
+                }
             }
-        }
-        usrContainer.autosize();
+            usrContainer.autosize();
+        } catch (Exception e) {}
     }
 
     @FXML
@@ -155,6 +157,7 @@ public class Chat {
 
             usrContainer.getChildren().add(usrBox);
             usrBox.autosize();
+            if (!searchField.getText().isBlank()) search();
         } catch (IOException e) {
             Login.alert("File Load Error", "Cannot load user.fxml", "Check if user.fxml exist");
         }
