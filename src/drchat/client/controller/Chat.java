@@ -33,6 +33,8 @@ public class Chat {
 
     public void load() {
 
+        inputArea.setTextFormatter(new TextFormatter<String>(change -> 
+            change.getControlNewText().length() <= 255 ? change : null));
         new Thread(()-> {
             Platform.runLater(()-> {
                 loadUsers();
