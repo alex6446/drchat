@@ -61,6 +61,9 @@ public class Chat {
     private TextArea inputArea;
 
     @FXML
+    private TextField searchField;
+
+    @FXML
     public void sendMessage() throws Exception {
         if (!inputArea.getText().isBlank()) {
             Message message = new Message(userId, roomId, inputArea.getText());
@@ -69,6 +72,21 @@ public class Chat {
             Login.getClient().send(new SocketMessage(SocketMessage.Type.MESSAGE, message));
         }
             
+    }
+
+    @FXML
+    public void search() throws Exception {
+        for (int i = 0; i < usrContainer.getChildren().size(); i++) {
+            if (((Label) ((HBox) usrContainer.getChildren().get(i)).getChildren().get(1)).getText().contains(searchField.getText()) ||
+                       searchField.getText().isEmpty()) {
+                usrContainer.getChildren().get(i).setManaged(true);
+                usrContainer.getChildren().get(i).setVisible(true);
+            } else {
+                usrContainer.getChildren().get(i).setManaged(false);
+                usrContainer.getChildren().get(i).setVisible(false);
+            }
+        }
+        usrContainer.autosize();
     }
 
     @FXML
